@@ -107,7 +107,7 @@ const HeroSection = () => {
         <div
           className="size-10 bg-white/50 shadow-lg rounded-full flex  
   items-center justify-center absolute top-1/3 right-8 -translate-y-1/2
-  transition-opacity duration-500 ease-in-out cursor-pointer"
+  transition-opacity duration-500 ease-in-out cursor-pointer dark:text-white"
           onClick={handleNext}
           role="button"
           tabIndex={0}
@@ -133,7 +133,7 @@ const HeroSection = () => {
             <div className="w-full flex items-center gap-4 mt-2 justify-center">
               <Button
                 variant={"outline"}
-                className="px-6 py-6 flex gap-4 items-center w-full text-black"
+                className="px-6 py-6 flex gap-4 items-center w-full text-black dark:text-white"
               >
                 <span>Voir plus </span>
                 <ArrowBigRightDash className="shrink-0 size-8" />
