@@ -156,8 +156,17 @@ const SmallScreenNavigation = () => {
         <div className="flex flex-col gap-4 justify-end px-4 py-4">
           {user ? (
             <SheetClose asChild>
-              <Link href={"/profile"}>
+              <Link
+                href={"/profile"}
+                className="flex w-full gap-4 items-center"
+              >
                 <AvatarUser />
+                <div className="flex flex-col gap-0.5 flex-1 items-start justify-start">
+                  <span className="text-sm font-medium tracking-wide capitalize">
+                    {user.name}
+                  </span>
+                  <span className="text-xs text-gray-500">{user.email}</span>
+                </div>
               </Link>
             </SheetClose>
           ) : (
