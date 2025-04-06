@@ -112,7 +112,7 @@ const HeroSection = () => {
       <section className="w-full py-4 lg:h-96 px-4 lg:px-0 box-border">
         <div className="bg-amber-800 rounded-lg shadow-xl lg:px-2 h-full">
           <div className="w-full px-4 gap-3 py-6 text-white flex flex-col items-center">
-            <h1 className=" text-3xl font-bold leading-tight tracking-tight">
+            <h1 className=" text-3xl font-bold leading-tight tracking-tight text-pretty text-center">
               Explorez nos nouveaux contenus
             </h1>
             <p className="text-sm tracking-wide leading-normal max-w-md text-center">
