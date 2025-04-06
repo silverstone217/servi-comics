@@ -22,9 +22,15 @@ const HeroSection = () => {
   const content = useMemo(() => ContentsData[index], [index]);
 
   return (
-    <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-4 px-4 gap-x-2 gap-y-2">
+    <div
+      className="w-full max-w-7xl mx-auto grid lg:grid-cols-4
+    overflow-x-hidden"
+    >
       {/* section 1 */}
-      <section className="w-full h-96 lg:col-span-3 relative p-4">
+      <section
+        className="w-full lg:w-full h-[420px] lg:col-span-3 
+      relative p-6 overflow-hidden"
+      >
         {/* bg image blur background */}
         <Image
           className="w-full h-full object-cover blur-lg shadow absolute inset-0
@@ -35,7 +41,7 @@ const HeroSection = () => {
           width={1000}
           height={800}
         />
-        <div className="w-full h-full relative">
+        <div className="w-full h-full relative lg:p-4">
           {/* image bg 2 */}
           <Image
             className="w-full h-full object-cover shadow-xl brightness-75 -z-10
@@ -51,7 +57,7 @@ const HeroSection = () => {
           <div className="w-full h-full px-4 gap-3 py-6 z-20 text-white flex flex-col justify-end">
             {/* category */}
             <p className="capitalize text-sm font-medium text-[#ff9900]">
-              {content.category} .
+              {content.category}
             </p>
             {/* title */}
             <h1 className="lg:text-3xl text-xl font-bold leading-tight tracking-tight line-clamp-1 max-w-md">
@@ -63,7 +69,7 @@ const HeroSection = () => {
                 <span
                   key={index}
                   className="capitalize text-xs 
-                  text-white tracking-wide
+                  text-white tracking-wide line-clamp-1
                   px-2 py-1 bg-primary rounded-lg
                   "
                 >
@@ -100,19 +106,22 @@ const HeroSection = () => {
         {/* absolute next button */}
         <div
           className="size-10 bg-white/50 shadow-lg rounded-full flex  
-          items-center justify-center absolute top-1/3 right-8 -translate-y-1/2
-          transition-opacity duration-500 ease-in-out"
+  items-center justify-center absolute top-1/3 right-8 -translate-y-1/2
+  transition-opacity duration-500 ease-in-out cursor-pointer"
           onClick={handleNext}
+          role="button"
+          tabIndex={0}
+          aria-label="Passer au contenu suivant"
         >
           <ArrowBigRight size={34} />
         </div>
       </section>
 
       {/* section 2 */}
-      <section className="w-full py-4 lg:h-96 px-4 lg:px-0 box-border">
-        <div className="bg-amber-800 rounded-lg shadow-xl lg:px-2 h-full">
+      <section className="w-full lg:h-[420px] lg:px-0 box-border">
+        <div className="bg-amber-800  lg:px-4 h-full">
           <div className="w-full px-4 gap-3 py-6 text-white flex flex-col items-center">
-            <h1 className=" text-3xl font-bold leading-tight tracking-tight text-pretty text-center">
+            <h1 className="lg:text-4xl text-3xl font-bold leading-tight tracking-tight text-pretty text-center">
               Explorez nos nouveaux contenus
             </h1>
             <p className="text-sm tracking-wide leading-normal max-w-md text-center">
