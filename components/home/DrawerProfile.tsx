@@ -11,6 +11,7 @@ import {
 import AvatarUser from "../AvatarUser";
 import { signOut } from "next-auth/react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const DrawerProfile = () => {
   const logUserOut = async () => {
@@ -22,6 +23,8 @@ const DrawerProfile = () => {
     }
   };
 
+  const router = useRouter();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -30,7 +33,9 @@ const DrawerProfile = () => {
       <DropdownMenuContent>
         <DropdownMenuLabel>Mon compte</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Dashboard</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => router.push("/overview")}>
+          Dashboard
+        </DropdownMenuItem>
         <DropdownMenuItem>Bookmark</DropdownMenuItem>
         <DropdownMenuItem>Profile</DropdownMenuItem>
         <DropdownMenuSeparator />

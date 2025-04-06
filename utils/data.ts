@@ -16,7 +16,7 @@ export const HomeLinksPage = [
     icon: House,
   },
   {
-    href: "#",
+    href: "/catalogues",
     label: "catalogues",
     icon: LibraryBig,
   },
