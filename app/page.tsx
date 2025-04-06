@@ -12,7 +12,9 @@ export default async function Home() {
       {/* hero section */}
       <HeroSection />
       {/* content */}
-      <NewRealizedContent />
+      <div className="w-full max-w-7xl mx-auto">
+        <NewRealizedContent />
+      </div>
       {/* footer */}
     </div>
   );

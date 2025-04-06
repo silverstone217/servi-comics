@@ -5,7 +5,10 @@ import Image from "next/image";
 
 const NewRealizedContent = () => {
   return (
-    <div className="w-full max-w-7xl max-auto px-4 py-8 md:px-8 md:p-8 mt-10 bg-secondary flex flex-col gap-6">
+    <div
+      className="w-full max-w-7xl max-auto px-4 py-8 
+    md:px-8 md:p-8 mt-10 bg-secondary flex flex-col gap-6"
+    >
       <h1 className="text-4xl uppercase tracking-tight font-bold">
         New Released Comic
       </h1>
