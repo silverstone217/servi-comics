@@ -34,7 +34,7 @@ const SignInPage = async () => {
       </div>
 
       {/* form small screen */}
-      <div className="w-full flex-1 md:hidden flex flex-col">
+      <div className="w-full flex-1 md:hidden flex flex-col gap-6">
         <Form />
 
         <div

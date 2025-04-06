@@ -50,11 +50,19 @@ export const SwitchThemSmallScreen = () => {
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
       {theme === "dark" ? (
-        <Moon className={`h-6 w-6 transition-all duration-300 ease-in-out`} />
+        <Moon
+          className={`h-6 w-6 transition-all duration-300 ease-in-out text-white`}
+        />
       ) : (
-        <Sun className={`h-6 w-6  transition-all duration-300 ease-in-out`} />
+        <Sun
+          className={`h-6 w-6  transition-all duration-300 ease-in-out text-black`}
+        />
       )}
-      <span className="text-sm">{theme === "dark" ? "Sombre" : "Claire"}</span>
+      <span
+        className={`text-sm ${theme === "dark" ? "text-white" : "text-black"}`}
+      >
+        {theme === "dark" ? "Sombre" : "Claire"}
+      </span>
     </Button>
   );
 };
