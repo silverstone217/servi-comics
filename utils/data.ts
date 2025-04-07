@@ -3,7 +3,6 @@ import {
   LibraryBig,
   GalleryVerticalEnd,
   GalleryHorizontal,
-  User,
   LayoutDashboard,
   GalleryThumbnails,
 } from "lucide-react";
@@ -32,21 +31,21 @@ export const HomeLinksPage = [
   },
 ];
 
-export const ProfileUserPages = [
+export const DashboardPages = [
+  {
+    href: "/",
+    label: "Accueil",
+    icon: House,
+  },
   {
     href: "/overview",
-    label: "Dashboard",
+    label: "Overview",
     icon: LayoutDashboard,
   },
   {
-    href: "/contenus",
+    href: "/contents",
     label: "Mes publications",
     icon: GalleryThumbnails,
-  },
-  {
-    href: "/profile",
-    label: "Profile",
-    icon: User,
   },
 ];
 
@@ -61,20 +60,24 @@ export const LanguagesData = [
   },
 
   {
-    label: "Español",
+    label: "Espagnol",
     value: "es",
   },
   {
-    label: "Italiano",
-    value: "it",
+    label: "Lingala",
+    value: "lin",
   },
   {
-    label: "Português",
+    label: "Portuguais",
     value: "pt-BR",
   },
   {
     label: "Japonais",
     value: "jp",
+  },
+  {
+    label: "Autre",
+    value: "other",
   },
 ];
 
@@ -94,6 +97,18 @@ export const TagsData = [
   {
     label: "Fantastique",
     value: "fantasy",
+  },
+  {
+    label: "Ecchi",
+    value: "ecchi",
+  },
+  {
+    label: "Harem",
+    value: "harem",
+  },
+  {
+    label: "Harem inversé",
+    value: "harem_reverse",
   },
   {
     label: "Science-Fiction",
@@ -190,8 +205,16 @@ export const CategoriesData = [
     value: "manga",
   },
   {
-    label: "Webtoon",
-    value: "webtoon",
+    label: "Comics (BD)",
+    value: "comics",
+  },
+  {
+    label: "Manhwa",
+    value: "manhwa",
+  },
+  {
+    label: "Manhua",
+    value: "manhua",
   },
   {
     label: "Light Novel",
@@ -200,3 +223,18 @@ export const CategoriesData = [
 ];
 
 export const OrangeVibrant = "#ff9900";
+
+export const StatusData = [
+  {
+    label: "En cours",
+    value: "on_going",
+  },
+  {
+    label: "En pause",
+    value: "hiatus",
+  },
+  {
+    label: "Terminé",
+    value: "finished",
+  },
+];

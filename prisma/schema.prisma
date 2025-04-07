@@ -90,7 +90,7 @@ model Content {
   slug        String
   image       String?
   cover       String?
-  type        String    @default("manga") // WEBCOMIC, MANGA, LIGHT_NOVEL
+  category    String    @default("manga") // WEBCOMIC, MANGA, LIGHT_NOVEL
   status      String    @default("on_going")
   description String
   chapters    Chapter[]
