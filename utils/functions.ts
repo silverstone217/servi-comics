@@ -42,3 +42,9 @@ export const returnColorByStatus = (status: statusType): string => {
       return "#FFFFFF"; // Blanc
   }
 };
+
+// capitalize first letter
+export const capitalizeFirstLetter = (text: string): string => {
+  if (!text) return ""; // Vérifie si le texte est vide ou null
+  return text.charAt(0).toUpperCase() + text.slice(1);
+};
