@@ -23,7 +23,7 @@ const ViewContentTop = ({ content }: Props) => {
   return (
     <section
       className="relative w-full flex md:flex-row flex-col items-center 
-      md:items-start  justify-center
+      md:items-start justify-center
      py-6 md:py-8 px-4 gap-6
      "
     >
@@ -35,7 +35,8 @@ const ViewContentTop = ({ content }: Props) => {
           priority
           width={1200}
           height={1000}
-          className="w-full md:h-[450px] blur-3xl absolute -z-20 top-0 left-0 object-cover"
+          className="w-full h-[680px] md:h-[450px] blur-3xl 
+          absolute -z-20 top-0 left-0 object-cover"
         />
       )}
 
@@ -58,7 +59,7 @@ const ViewContentTop = ({ content }: Props) => {
       </div>
 
       {/* infos */}
-      <div className="flex-1 h-full z-10 md:h-[450px] flex flex-col gap-4 w-full md:w-auto text-white">
+      <div className="flex-1 z-10 md:h-[450px] flex flex-col gap-4 w-full md:w-auto text-white">
         <div className="w-full flex items-center flex-wrap gap-2.5">
           {/* category */}
           <span className="text-[#ff9900] text-xs uppercase font-medium opacity-80 tracking-tight">
@@ -105,7 +106,7 @@ const ViewContentTop = ({ content }: Props) => {
         </span>
 
         {/* description */}
-        <p className="line-clamp-6 text-sm opacity-90 md:h-40 md:overflow-hidden">
+        <p className="line-clamp-6 text-sm opacity-90 max-h-40 md:h-40 overflow-hidden">
           {capitalizeFirstLetter(content.description)}
         </p>
 
