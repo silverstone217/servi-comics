@@ -1,3 +1,5 @@
+import { statusType } from "@/types/contentTypes";
+
 export const isEmptyString = (value: string) => {
   return value.replace(/ /g, "") === "";
 };
@@ -27,3 +29,16 @@ type ReturnDataValueType = {
 export function returnDataValue({ data, value }: ReturnDataValueType) {
   return data.find((item) => item.value === value)?.label || "";
 }
+
+export const returnColorByStatus = (status: statusType): string => {
+  switch (status) {
+    case "hiatus":
+      return "#CC8400"; // Orange
+
+    case "finished":
+      return "#4B5563"; // Bleu-gris sombre (hex pour Tailwind `gray-600`)
+
+    default:
+      return "#FFFFFF"; // Blanc
+  }
+};

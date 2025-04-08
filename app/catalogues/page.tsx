@@ -1,11 +1,14 @@
+import { getContents } from "@/actions/contentsActions";
+import MainComponent from "@/components/catalogues/MainComponent";
 import Header from "@/components/home/Header";
 import React from "react";
 
-const CatalogsPage = () => {
+const CatalogsPage = async () => {
+  const contents = await getContents();
   return (
     <div>
       <Header />
-      <h1>Catalogs Page</h1>
+      <MainComponent contents={contents} />
     </div>
   );
 };

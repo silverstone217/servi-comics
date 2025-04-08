@@ -1,17 +1,19 @@
 "use client";
+import { CategoriesData, LanguagesData, StatusData } from "@/utils/data";
 import { Content } from "@prisma/client";
 import Image from "next/image";
 import React, { useMemo, useState } from "react";
 import no_img from "@/public/images/no_image.png";
-import { returnDataValue } from "@/utils/functions";
-import { CategoriesData, LanguagesData } from "@/utils/data";
 import HeaderFilter from "./HeaderFilter";
+import { returnColorByStatus, returnDataValue } from "@/utils/functions";
+import { statusType } from "@/types/contentTypes";
 import Link from "next/link";
 
 interface Props {
   contents: Content[];
 }
-const MainContents = ({ contents }: Props) => {
+
+const MainComponent = ({ contents }: Props) => {
   const [searchText, setSearchText] = useState("");
   const [language, setLanguage] = useState("all");
   const [target, setTarget] = useState("all");
@@ -71,7 +73,7 @@ const MainContents = ({ contents }: Props) => {
       )}
 
       {/* Your posts */}
-      <div className="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-6">
         {filteredContents.map((content) => (
           <Link
             href={`/catalogues/${content.id}`}
@@ -89,6 +91,24 @@ const MainContents = ({ contents }: Props) => {
                 className="w-full h-full md:h-72 object-cover rounded-lg 
           transition-transform duration-500 ease-in-out group-hover:scale-125"
               />
+              <div className="w-full absolute top-0 left-0 right-0 flex items-center gap1.5">
+                {/* status */}
+                {content.status !== "on_going" && (
+                  <span
+                    className="text-[10px] px-1.5 py-0.5 text-white rounded"
+                    style={{
+                      backgroundColor: returnColorByStatus(
+                        content.status as statusType
+                      ),
+                    }}
+                  >
+                    {returnDataValue({
+                      data: StatusData,
+                      value: content.status,
+                    })}
+                  </span>
+                )}
+              </div>
             </div>
             {/* content */}
             <div className="w-full flex flex-col gap-1.5">
@@ -123,4 +143,4 @@ const MainContents = ({ contents }: Props) => {
   );
 };
 
-export default MainContents;
+export default MainComponent;

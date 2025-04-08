@@ -15,7 +15,7 @@ export const ContentsData = [
     tags: ["aventure", "fantaisie", "magie", "combat"],
     target: "shonen",
     authorId: "auth001",
-    language: "en fr esp",
+    language: "en",
   },
   {
     title: "Les Secrets de l'Académie Lunaire",
@@ -27,7 +27,7 @@ export const ContentsData = [
     tags: ["magie", "romance", "ecole", "mystere"],
     target: "shojo",
     authorId: "auth002",
-    language: "en es",
+    language: "es",
   },
   {
     title: "Chroniques d'une Vie Quotidienne",
@@ -39,7 +39,7 @@ export const ContentsData = [
     tags: ["comedie", "slice of life", "amitié", "ville"],
     target: "josei",
     authorId: "auth003",
-    language: "en fr",
+    language: "fr",
   },
   {
     title: "L'Ombre du Samouraï",
@@ -51,7 +51,7 @@ export const ContentsData = [
     tags: ["action", "historique", "samourai", "vengeance"],
     target: "seinen",
     authorId: "auth004",
-    language: "es ja",
+    language: "ja",
   },
   {
     title: "Le Voyage de Kiko",

@@ -142,6 +142,26 @@ export const getMyContent = async () => {
     where: {
       authorId: user.id,
     },
+    orderBy: { createdAt: "desc" },
   });
   return myContent ?? [];
+};
+
+// GET ALL CONTENTS
+export const getContents = async () => {
+  const myContent = await prisma.content.findMany({
+    orderBy: { createdAt: "desc" },
+  });
+  return myContent ?? [];
+};
+
+// GET CONTENT BY ID
+export const getContentByID = async (id: string) => {
+  const content = await prisma.content.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  return content ?? null;
 };

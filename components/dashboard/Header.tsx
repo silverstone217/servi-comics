@@ -125,7 +125,7 @@ const SmallScreenNavigation = () => {
 
           {user && (
             <>
-              <SheetClose asChild>
+              {/* <SheetClose asChild>
                 <Link href={"/overview"}>
                   <span
                     className={`text-lg font-medium tracking-wide hover:underline 
@@ -136,7 +136,7 @@ const SmallScreenNavigation = () => {
                     Dashboard
                   </span>
                 </Link>
-              </SheetClose>
+              </SheetClose> */}
 
               <SheetClose asChild>
                 <Link href={"#"}>

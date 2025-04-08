@@ -55,7 +55,7 @@ export const LanguagesData = [
     value: "fr",
   },
   {
-    label: "English",
+    label: "Anglais",
     value: "en",
   },
 
@@ -68,7 +68,7 @@ export const LanguagesData = [
     value: "lin",
   },
   {
-    label: "Portuguais",
+    label: "Portugais",
     value: "pt-BR",
   },
   {

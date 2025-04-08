@@ -4,9 +4,13 @@ import { ContentsData } from "@/utils/contentData";
 import Image from "next/image";
 import { ArrowBigRight, ArrowBigRightDash } from "lucide-react";
 import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
+import { returnDataValue } from "@/utils/functions";
+import { LanguagesData } from "@/utils/data";
 
 const HeroSection = () => {
   const [index, setIndex] = useState(0);
+  const router = useRouter();
 
   const handleNext = () => {
     setIndex((prevIndex) =>
@@ -78,19 +82,18 @@ const HeroSection = () => {
               ))}
             </div>
             {/* lang */}
-            <div className="w-full flex items-center gap-2">
-              {content.language.split(" ").map((language, index) => (
-                <span
-                  key={index}
-                  className="uppercase text-xs 
+
+            <span
+              className="uppercase text-xs 
                       text-white tracking-wide
                       
                       "
-                >
-                  {language}
-                </span>
-              ))}
-            </div>
+            >
+              {returnDataValue({
+                data: LanguagesData,
+                value: content.language,
+              })}
+            </span>
 
             {/* description */}
             <p
@@ -122,7 +125,7 @@ const HeroSection = () => {
         <div className="bg-amber-800  lg:px-4 h-full">
           <div className="w-full px-4 gap-3 py-6 text-white flex flex-col items-center">
             <h1 className="lg:text-4xl text-3xl font-bold leading-tight tracking-tight text-pretty text-center">
-              Explorez nos nouveaux contenus
+              Explorez nos divers contenus
             </h1>
             <p className="text-sm tracking-wide leading-normal max-w-md text-center">
               Discutez avec nos créateurs et découvrez de nouveaux mangas,
@@ -134,6 +137,7 @@ const HeroSection = () => {
               <Button
                 variant={"outline"}
                 className="px-6 py-6 flex gap-4 items-center w-full text-black dark:text-white"
+                onClick={() => router.push("/catalogues")}
               >
                 <span>Voir plus </span>
                 <ArrowBigRightDash className="shrink-0 size-8" />

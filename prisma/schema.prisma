@@ -85,7 +85,7 @@ model User {
 }
 
 model Content {
-  id          String    @id @default(uuid())
+  id          String    @id @default(cuid())
   title       String
   slug        String
   image       String?
@@ -109,7 +109,7 @@ model Content {
 }
 
 model Chapter {
-  id          String   @id @default(uuid())
+  id          String   @id @default(cuid())
   title       String
   order       Int
   contentId   String
@@ -120,7 +120,7 @@ model Chapter {
 }
 
 model Page {
-  id        String  @id @default(uuid())
+  id        String  @id @default(cuid())
   imageUrl  String
   order     Int
   chapterId String
