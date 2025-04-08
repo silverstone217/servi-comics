@@ -23,7 +23,7 @@ const ViewContentTop = ({ content }: Props) => {
   return (
     <section
       className="relative w-full flex md:flex-row flex-col items-center 
-      md:items-start justify-center
+      md:items-start justify-center min-h-[680px] md:min-h-auto
      py-6 md:py-8 px-4 gap-6
      "
     >
