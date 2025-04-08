@@ -2,6 +2,8 @@
 import {
   addContentSchema,
   addContentSecondSchema,
+  modifyContentFPSchema,
+  modifyContentSISchema,
 } from "@/schema/contentSchema";
 import { z } from "zod";
 import { getUser } from "./authAction";
@@ -133,6 +135,236 @@ export const addContentImages = async (
     imgUrl: image,
     coverUrl: cover,
   };
+};
+
+//MODIFY CONTENT
+export type modifyContentFirstPartType = z.infer<typeof modifyContentFPSchema>;
+
+export const modifyContentFirstPart = async (
+  content: modifyContentFirstPartType
+) => {
+  const user = await getUser();
+  if (!user) {
+    return {
+      error: true,
+      message: "Veuillez vous connecter pour modifier un contenu.",
+    };
+  }
+
+  const validationResult = modifyContentFPSchema.safeParse(content);
+
+  if (!validationResult.success) {
+    // Retourner les erreurs Zod formatées
+
+    console.log(validationResult.error.issues, "erreurs survenues");
+    return {
+      error: true,
+      message: "Erreur de validation",
+      errors: validationResult.error.issues, // Important: Retourner les erreurs Zod
+    };
+  }
+
+  const validated = validationResult.data; // Utiliser les données validées
+  const slug = createSlug(validated.title.toLowerCase().trim());
+
+  const isContentExisted = await prisma.content.findUnique({
+    where: { id: validated.contentId },
+  });
+
+  if (!isContentExisted) {
+    return {
+      error: true,
+      message: "Ce contenu n'existe pas ou n'est plus disponible!",
+    };
+  }
+  if (isContentExisted.authorId !== user.id) {
+    return {
+      error: true,
+      message: "Ce contenu ne vous appartient pas!",
+    };
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { contentId: _ID, ...rest } = validated;
+
+  const updateContent = await prisma.content.update({
+    where: { id: validated.contentId },
+    data: {
+      ...rest,
+      slug,
+    },
+  });
+
+  if (!updateContent) {
+    return {
+      error: true,
+      message: "Impossible d'effectuer cette action!",
+    };
+  }
+  return {
+    error: false,
+    message: "Contenu modifié avec succès",
+  };
+};
+
+export type modifyContentSecondPartType = z.infer<typeof modifyContentSISchema>;
+
+export const modifyContentSecondPart = async (
+  content: modifyContentSecondPartType
+) => {
+  const user = await getUser();
+  if (!user) {
+    return {
+      error: true,
+      message: "Veuillez vous connecter pour modifier un contenu.",
+    };
+  }
+
+  const validationResult = modifyContentSISchema.safeParse(content);
+
+  if (!validationResult.success) {
+    // Retourner les erreurs Zod formatées
+
+    console.log(validationResult.error.issues, "erreurs survenues");
+    return {
+      error: true,
+      message: "Erreur de validation",
+      errors: validationResult.error.issues, // Important: Retourner les erreurs Zod
+    };
+  }
+
+  const validated = validationResult.data; // Utiliser les données validées
+
+  const isContentExisted = await prisma.content.findUnique({
+    where: { id: validated.contentId },
+  });
+
+  if (!isContentExisted) {
+    return {
+      error: true,
+      message: "Ce contenu n'existe pas ou n'est plus disponible!",
+    };
+  }
+  if (isContentExisted.authorId !== user.id) {
+    return {
+      error: true,
+      message: "Ce contenu ne vous appartient pas!",
+    };
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { contentId: _ID, ...rest } = validated;
+
+  const updateContent = await prisma.content.update({
+    where: { id: validated.contentId },
+    data: {
+      ...rest,
+    },
+  });
+
+  if (!updateContent) {
+    return {
+      error: true,
+      message: "Impossible d'effectuer cette action!",
+    };
+  }
+  return {
+    error: false,
+    message: "Contenu modifié avec succès",
+  };
+};
+
+export const updateCoverServer = async ({
+  cover,
+  contentId,
+}: {
+  cover: string;
+  contentId: string;
+}) => {
+  const user = await getUser();
+  if (!user) {
+    return {
+      error: true,
+      message: "Veuillez vous connecter pour modifier un contenu.",
+    };
+  }
+
+  const isContentExisted = await prisma.content.findUnique({
+    where: { id: contentId },
+  });
+
+  if (!isContentExisted) {
+    return {
+      error: true,
+      message: "Ce contenu n'existe pas ou n'est plus disponible!",
+    };
+  }
+  if (isContentExisted.authorId !== user.id) {
+    return {
+      error: true,
+      message: "Ce contenu ne vous appartient pas!",
+    };
+  }
+  const updateContent = await prisma.content.update({
+    where: { id: contentId },
+    data: { cover: cover ?? undefined },
+  });
+
+  if (!updateContent) {
+    return {
+      error: true,
+      message: "Impossible de modifier ou d'ajouter votre image de couverture",
+    };
+  }
+
+  return {
+    error: false,
+    message: "Modifiée avec succès!",
+  };
+};
+
+// DELETE CMY CONTENT
+export const deleteMyContent = async (contentId: string) => {
+  const user = await getUser();
+  if (!user) {
+    return {
+      error: true,
+      message: "Veuillez vous connecter pour supprimer un contenu.",
+    };
+  }
+  const isContentExisted = await prisma.content.findUnique({
+    where: { id: contentId },
+  });
+
+  if (!isContentExisted) {
+    return {
+      error: true,
+      message: "Ce contenu n'existe pas ou n'est plus disponible!",
+    };
+  }
+  if (isContentExisted.authorId !== user.id) {
+    return {
+      error: true,
+      message: "Ce contenu ne vous appartient pas!",
+    };
+  }
+
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const _deleteContent = await prisma.content.delete({
+      where: { id: contentId },
+    });
+    return {
+      error: false,
+      message: "Le contenu a été supprimé!",
+    };
+  } catch (error) {
+    console.error("Erreur lors de la suppression du contenu:", error);
+    return {
+      error: true,
+      message: "Une erreur est survenue lors de la suppression du contenu.",
+    };
+  }
 };
 
 // Get MY CONTENT

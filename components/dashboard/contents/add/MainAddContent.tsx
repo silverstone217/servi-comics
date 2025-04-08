@@ -23,7 +23,7 @@ import {
   newContentType,
 } from "@/actions/contentsActions";
 
-const MainAddContent = () => {
+const MainModifyContent = () => {
   const [category, setCategory] = useState<categoryType | "">("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -258,11 +258,11 @@ const MainAddContent = () => {
             isEmptyString(status)
           }
         >
-          {loading ? "en cours..." : "Ajouter"}
+          {loading ? "en cours..." : "Modifier"}
         </Button>
       </div>
     </div>
   );
 };
 
-export default MainAddContent;
+export default MainModifyContent;

@@ -48,3 +48,12 @@ export const capitalizeFirstLetter = (text: string): string => {
   if (!text) return ""; // Vérifie si le texte est vide ou null
   return text.charAt(0).toUpperCase() + text.slice(1);
 };
+
+// same arrays func
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function areArraysEqual(arr1: any[], arr2: any[]): boolean {
+  if (arr1.length !== arr2.length) return false;
+  const sortedArr1 = arr1.slice().sort();
+  const sortedArr2 = arr2.slice().sort();
+  return sortedArr1.every((element, index) => element === sortedArr2[index]);
+}

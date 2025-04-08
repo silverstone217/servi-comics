@@ -113,7 +113,7 @@ model Chapter {
   title       String
   order       Int
   contentId   String
-  content     Content  @relation(fields: [contentId], references: [id])
+  content     Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
   pages       Page[] // Pour webcomics/manga
   textContent String? // Pour light novels
   createdAt   DateTime @default(now())
@@ -124,5 +124,5 @@ model Page {
   imageUrl  String
   order     Int
   chapterId String
-  chapter   Chapter @relation(fields: [chapterId], references: [id])
+  chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
 }

@@ -12,6 +12,7 @@ import Image from "next/image";
 import React from "react";
 import { Button } from "../ui/button";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface Props {
   content: Content;
@@ -19,6 +20,7 @@ interface Props {
 const ViewContentTop = ({ content }: Props) => {
   const { data: session } = useSession();
   const user = session?.user;
+  const router = useRouter();
 
   return (
     <section
@@ -118,7 +120,10 @@ const ViewContentTop = ({ content }: Props) => {
 
           {/* modify */}
           {user && user.id === content.authorId && (
-            <Button variant={"secondary"}>
+            <Button
+              variant={"secondary"}
+              onClick={() => router.push(`/contents/${content.id}/modifier`)}
+            >
               <span>Modifier</span>
             </Button>
           )}
