@@ -1,6 +1,6 @@
 "use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { categoryType, targetType } from "@/types/contentTypes";
+import { categoryType, statusType, targetType } from "@/types/contentTypes";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
-import { TagsData, TargetData } from "@/utils/data";
+import { StatusData, TagsData, TargetData } from "@/utils/data";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
@@ -28,6 +28,7 @@ interface Props {
   cover: File | null;
   isColored: boolean;
   publishedAt: string;
+  status: statusType | "";
 
   setCategory: React.Dispatch<React.SetStateAction<"" | categoryType>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -40,6 +41,7 @@ interface Props {
   setCover: React.Dispatch<React.SetStateAction<File | null>>;
   setIsColored: React.Dispatch<React.SetStateAction<boolean>>;
   setPublishedAt: React.Dispatch<React.SetStateAction<string>>;
+  setStatus: React.Dispatch<React.SetStateAction<"" | statusType>>;
 }
 
 const TabsForm = ({
@@ -63,6 +65,8 @@ const TabsForm = ({
   isColored,
   setPublishedAt,
   publishedAt,
+  status,
+  setStatus,
 }: Props) => {
   return (
     <Tabs defaultValue="principale" className="w-full">
@@ -81,6 +85,8 @@ const TabsForm = ({
           title={title}
           target={target}
           loading={loading}
+          setStatus={setStatus}
+          status={status}
         />
       </TabsContent>
       <TabsContent value="secondaire">
@@ -119,10 +125,12 @@ type PrincipaleTypes = {
   description: string;
   loading: boolean;
   target: targetType | "";
+  status: statusType | "";
 
   setDescription: React.Dispatch<React.SetStateAction<string>>;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   setTarget: React.Dispatch<React.SetStateAction<targetType | "">>;
+  setStatus: React.Dispatch<React.SetStateAction<"" | statusType>>;
 };
 const AddPrincipaleInfo = ({
   setDescription,
@@ -132,6 +140,8 @@ const AddPrincipaleInfo = ({
   title,
   target,
   loading,
+  setStatus,
+  status,
 }: PrincipaleTypes) => {
   return (
     <div className="w-full flex flex-col gap-4 py-4">
@@ -189,6 +199,29 @@ const AddPrincipaleInfo = ({
           </SelectTrigger>
           <SelectContent>
             {TargetData.map((tg, idx) => (
+              <SelectItem key={idx} value={tg.value}>
+                {tg.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      {/* Status */}
+      <div className="grid w-full items-center gap-1.5">
+        <Label htmlFor="target">Status *</Label>
+
+        <Select
+          onValueChange={(val) => setStatus(val as statusType)}
+          disabled={loading}
+          value={status}
+          required
+        >
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Choisir le public cible" />
+          </SelectTrigger>
+          <SelectContent>
+            {StatusData.map((tg, idx) => (
               <SelectItem key={idx} value={tg.value}>
                 {tg.label}
               </SelectItem>

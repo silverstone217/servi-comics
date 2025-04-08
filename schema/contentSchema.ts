@@ -10,6 +10,7 @@ export const addContentSchema = z.object({
   category: z.enum(["manga", "manhwa", "manhua", "comics", "light_novel"]),
   publishedAt: z.date(),
   isColored: z.boolean(),
+  status: z.enum(["on_going", "finished", "hiatus"]),
 });
 
 export const addContentSecondSchema = z.object({

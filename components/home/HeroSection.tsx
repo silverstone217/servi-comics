@@ -85,9 +85,7 @@ const HeroSection = () => {
 
             <span
               className="uppercase text-xs 
-                      text-white tracking-wide
-                      
-                      "
+                      text-white tracking-wide"
             >
               {returnDataValue({
                 data: LanguagesData,
@@ -110,7 +108,7 @@ const HeroSection = () => {
         <div
           className="size-10 bg-white/50 shadow-lg rounded-full flex  
   items-center justify-center absolute top-1/3 right-8 -translate-y-1/2
-  transition-opacity duration-500 ease-in-out cursor-pointer dark:text-white"
+  transition-opacity duration-500 ease-in-out cursor-pointer text-white"
           onClick={handleNext}
           role="button"
           tabIndex={0}

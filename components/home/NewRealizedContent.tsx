@@ -92,10 +92,10 @@ const NewRealizedContent = () => {
             className="bg-amber-900 rounded-lg flex flex-col gap-2.5 group 
           items-center justify-center w-full h-64"
           >
-            <span className="font-bold text-3xl tracking-tight text-balance">
+            <span className="font-bold text-3xl tracking-tight text-balance text-white">
               Voir plus
             </span>
-            <ArrowBigRightDash className="shrink-0 size-14" />
+            <ArrowBigRightDash className="shrink-0 size-14 text-white" />
           </div>
         </Link>
       </div>

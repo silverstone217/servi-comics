@@ -50,6 +50,7 @@ export const addContent = async (newContent: newContentType) => {
       language: validated.language,
       isColored: validated.isColored,
       publishedAt: validated.publishedAt,
+      status: validated.status,
     },
   });
 

@@ -1,5 +1,5 @@
 "use client";
-import { categoryType, targetType } from "@/types/contentTypes";
+import { categoryType, statusType, targetType } from "@/types/contentTypes";
 import React, { useState } from "react";
 import manga7 from "@/public/images/manga7.jpg";
 import Image from "next/image";
@@ -34,6 +34,7 @@ const MainAddContent = () => {
   const [cover, setCover] = useState<File | null>(null);
   const [isColored, setIsColored] = useState(false);
   const [publishedAt, setPublishedAt] = useState("");
+  const [status, setStatus] = useState<statusType | "">("");
 
   const [loading, setLoading] = useState(false);
 
@@ -150,6 +151,7 @@ const MainAddContent = () => {
         isColored,
         publishedAt: new Date(publishedAt),
         category: category as categoryType,
+        status: status as statusType,
       };
 
       const myContent = await addContent(formData);
@@ -224,6 +226,8 @@ const MainAddContent = () => {
         setIsColored={setIsColored}
         setPublishedAt={setPublishedAt}
         publishedAt={publishedAt}
+        setStatus={setStatus}
+        status={status}
       />
 
       <p
@@ -250,7 +254,8 @@ const MainAddContent = () => {
             isEmptyString(language) ||
             image === null ||
             isEmptyString(target) ||
-            tags.length < 1
+            tags.length < 1 ||
+            isEmptyString(status)
           }
         >
           {loading ? "en cours..." : "Ajouter"}
