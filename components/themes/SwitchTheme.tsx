@@ -44,23 +44,15 @@ export const SwitchThemSmallScreen = () => {
   return (
     <Button
       variant={"outline"}
-      className={`flex items-center gap-2 px-6 transition-all duration-300 ease-in-out ${
-        theme === "dark" ? "text-white" : "text-black"
-      }`}
+      className={`flex items-center gap-2 px-6 transition-all duration-300 ease-in-out`}
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
       {theme === "dark" ? (
-        <Moon
-          className={`h-6 w-6 transition-all duration-300 ease-in-out text-white`}
-        />
+        <Moon className={`h-6 w-6 transition-all duration-300 ease-in-out `} />
       ) : (
-        <Sun
-          className={`h-6 w-6  transition-all duration-300 ease-in-out text-black`}
-        />
+        <Sun className={`h-6 w-6  transition-all duration-300 ease-in-out `} />
       )}
-      <span
-        className={`text-sm ${theme === "dark" ? "text-white" : "text-black"}`}
-      >
+      <span className={`text-sm `}>
         {theme === "dark" ? "Sombre" : "Claire"}
       </span>
     </Button>
