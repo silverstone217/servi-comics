@@ -1,29 +1,38 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
-import { ContentsData } from "@/utils/contentData";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+// import { contents } from "@/utils/contentData";
 import Image from "next/image";
 import { ArrowBigRight, ArrowBigRightDash } from "lucide-react";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
-import { returnDataValue } from "@/utils/functions";
+import { capitalizeFirstLetter, returnDataValue } from "@/utils/functions";
 import { LanguagesData } from "@/utils/data";
+import { Content } from "@prisma/client";
 
-const HeroSection = () => {
+type Props = {
+  contents: Content[];
+};
+
+const HeroSection = ({ contents }: Props) => {
   const [index, setIndex] = useState(0);
   const router = useRouter();
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     setIndex((prevIndex) =>
-      prevIndex === ContentsData.length - 1 ? 0 : prevIndex + 1
+      prevIndex === contents.length - 1 ? 0 : prevIndex + 1
     );
-  };
+  }, [contents.length]);
 
   useEffect(() => {
     const interval = setInterval(() => handleNext(), 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [handleNext]);
 
-  const content = useMemo(() => ContentsData[index], [index]);
+  const content = useMemo(() => contents[index], [contents, index]);
+
+  if (contents.length < 1) {
+    return null;
+  }
 
   return (
     <div
@@ -36,26 +45,30 @@ const HeroSection = () => {
       relative p-6 overflow-hidden"
       >
         {/* bg image blur background */}
-        <Image
-          className="w-full h-full object-cover blur-lg shadow absolute inset-0
-          transition-opacity duration-500 ease-in-out rounded-lg -z-20"
-          src={content.image}
-          alt={content.title}
-          priority
-          width={1000}
-          height={800}
-        />
-        <div className="w-full h-full relative lg:p-4">
-          {/* image bg 2 */}
+        {content.image && (
           <Image
-            className="w-full h-full object-cover shadow-xl brightness-75 -z-10
-          transition-opacity duration-500 ease-in-out rounded-lg absolute inset-0"
+            className="w-full h-full object-cover blur-lg shadow absolute inset-0
+          transition-opacity duration-500 ease-in-out rounded-lg -z-20"
             src={content.image}
             alt={content.title}
             priority
             width={1000}
             height={800}
           />
+        )}
+        <div className="w-full h-full relative lg:p-4">
+          {/* image bg 2 */}
+          {content.image && (
+            <Image
+              className="w-full h-full object-cover shadow-xl brightness-75 -z-10
+          transition-opacity duration-500 ease-in-out rounded-lg absolute inset-0"
+              src={content.image}
+              alt={content.title}
+              priority
+              width={1000}
+              height={800}
+            />
+          )}
 
           {/* content */}
           <div className="w-full h-full px-4 gap-3 py-6 z-20 text-white flex flex-col justify-end">
@@ -64,7 +77,10 @@ const HeroSection = () => {
               {content.category}
             </p>
             {/* title */}
-            <h1 className="lg:text-3xl text-xl font-bold leading-tight tracking-tight line-clamp-1 max-w-md">
+            <h1
+              className="lg:text-3xl text-xl font-bold capitalize
+            leading-tight tracking-tight line-clamp-1 max-w-md"
+            >
               {content.title}
             </h1>
             {/* tags */}
@@ -99,7 +115,7 @@ const HeroSection = () => {
               max-w-md text-justify line-clamp-3
             "
             >
-              {content.description}
+              {capitalizeFirstLetter(content.description)}
             </p>
           </div>
         </div>

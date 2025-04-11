@@ -110,8 +110,8 @@ model Content {
 
 model Chapter {
   id          String   @id @default(cuid())
-  title       String
-  order       Int
+  title       String?
+  order       Float
   contentId   String
   content     Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
   pages       Page[] // Pour webcomics/manga

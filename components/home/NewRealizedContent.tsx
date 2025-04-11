@@ -1,12 +1,21 @@
 import React from "react";
-import { ContentsData } from "@/utils/contentData";
+// import { ContentsData } from "@/utils/contentData";
 import Link from "next/link";
 import Image from "next/image";
 import { returnDataValue } from "@/utils/functions";
-import { LanguagesData } from "@/utils/data";
+import { CategoriesData, LanguagesData } from "@/utils/data";
 import { ArrowBigRightDash } from "lucide-react";
+import { Content } from "@prisma/client";
 
-const NewRealizedContent = () => {
+type Props = {
+  contents: Content[];
+};
+
+const NewRealizedContent = ({ contents }: Props) => {
+  if (contents.length < 1) {
+    return null;
+  }
+
   return (
     <div
       className="w-full max-w-7xl max-auto px-4 py-16 
@@ -27,22 +36,24 @@ const NewRealizedContent = () => {
         </Link>
       </div>
       <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-8 ">
-        {ContentsData.slice(0, 5).map((content, idx) => (
+        {contents.slice(0, 5).map((content, idx) => (
           <Link href={"#"} key={idx}>
             <div className=" flex flex-col gap-4 group">
               {/* image */}
               <div className="overflow-hidden w-full h-64 rounded-lg">
-                <Image
-                  className="w-full h-full object-cover rounded-lg
+                {content.image && (
+                  <Image
+                    className="w-full h-full object-cover rounded-lg
                 transition-transform duration-500 ease-in-out
                 group-hover:scale-125
                 "
-                  src={content.image}
-                  alt={content.title}
-                  width={1000}
-                  height={800}
-                  priority
-                />
+                    src={content.image}
+                    alt={content.title}
+                    width={1000}
+                    height={800}
+                    priority
+                  />
+                )}
               </div>
               {/* div */}
               <div className="w-full flex flex-col gap-2">
@@ -54,7 +65,12 @@ const NewRealizedContent = () => {
                   className="text-xs text-gray-500 tracking-wide 
                 uppercase flex w-full items-center gap-4 justify-between"
                 >
-                  <span> {content.category}</span>
+                  <span>
+                    {returnDataValue({
+                      data: CategoriesData,
+                      value: content.category,
+                    })}
+                  </span>
                   <span className="">
                     {returnDataValue({
                       data: LanguagesData,
